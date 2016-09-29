@@ -46,7 +46,7 @@ void SaveEPS(
     f << "%%Title: Calibration Target" << std::endl;
     f << "%%Origin: 0 0" << std::endl;
     // usletter BoundingBox is 0, 0, 612, 792
-    f << "%%BoundingBox: 0 0 " << max_pts[0] << " " << max_pts[1] << std::endl;
+    f << "%%BoundingBox: 0 0 " << max_pts[1] << " " << max_pts[0] << std::endl;
     f << std::endl;
     f << "270 rotate 0 " << -max_pts[0] << " 0 translate" << std::endl;
 

@@ -2,11 +2,12 @@
 #include <memory>
 
 #include <pangolin/pangolin.h>
-#include <pangolin/gldraw.h>
+#include <pangolin/gl/gldraw.h>
 
 #include <sophus/se3.hpp>
 
 #include <calibu/calib/Calibrator.h>
+#include <calibu/cam/camera_models_kb4.h>
 #include <calibu/image/ImageProcessing.h>
 #include <calibu/target/TargetGridDot.h>
 #include <calibu/target/RandomGrid.h>
@@ -171,28 +172,28 @@ int main( int argc, char** argv)
 
       if(filename == "fov") {
         Eigen::Vector2i size_;
-        Eigen::VectorXd params_(FovCamera<double>::NumParams);
+        Eigen::VectorXd params_(int(FovCamera<double>::NumParams));
         size_ << w_i, h_i;
         params_ << 300, 300, w_i/2.0, h_i/2.0, 0.2;
         std::shared_ptr<CameraInterface<double>> starting_cam(new FovCamera<double>(params_, size_));
         input_cameras.push_back( CameraAndPose(starting_cam, Sophus::SE3d() ) );
       }else if(filename == "poly2") {
         Eigen::Vector2i size_;
-        Eigen::VectorXd params_(Poly2Camera<double>::NumParams);
+        Eigen::VectorXd params_(int(Poly2Camera<double>::NumParams));
         size_ << w_i, h_i;
         params_ << 300, 300, w_i/2.0, h_i/2.0, 0.0, 0.0, 0.0;
         std::shared_ptr<CameraInterface<double>> starting_cam(new Poly2Camera<double>(params_, size_));
         input_cameras.push_back( CameraAndPose(starting_cam, Sophus::SE3d() ) );
       }else if(filename == "poly3" || filename =="poly") {
         Eigen::Vector2i size_;
-        Eigen::VectorXd params_(Poly3Camera<double>::NumParams);
+        Eigen::VectorXd params_(int(Poly3Camera<double>::NumParams));
         size_ << w_i, h_i;
         params_ << 300, 300, w_i/2.0, h_i/2.0, 0.0, 0.0, 0.0;
         std::shared_ptr<CameraInterface<double>> starting_cam(new Poly3Camera<double>(params_, size_));
         input_cameras.push_back( CameraAndPose(starting_cam, Sophus::SE3d() ) );
       }else if(filename == "kb4") {
         Eigen::Vector2i size_;
-        Eigen::VectorXd params_(KannalaBrandtCamera<double>::NumParams);
+        Eigen::VectorXd params_(int(KannalaBrandtCamera<double>::NumParams));
         size_ << w_i, h_i;
         params_ << 300, 300, w_i/2.0, h_i/2.0, 0.0, 0.0, 0.0, 0.0;
         std::shared_ptr<CameraInterface<double>> starting_cam(new KannalaBrandtCamera<double>(params_, size_));
@@ -263,7 +264,7 @@ int main( int argc, char** argv)
     }else{
       // Generic starting set of parameters.
       Eigen::Vector2i size_;
-      Eigen::VectorXd params_(FovCamera<double>::NumParams);
+      Eigen::VectorXd params_(int(FovCamera<double>::NumParams));
       size_ << w_i, h_i;
       params_ << 300, 300, w_i/2.0, h_i/2.0, 0.2;
       std::shared_ptr<FovCamera<double>>
@@ -392,8 +393,7 @@ int main( int argc, char** argv)
 
         tracking_good[iI] = target.FindTarget(
             image_processing, conic_finder.Conics(),
-            ellipse_target_map
-                                              );
+            ellipse_target_map);
 
         if(tracking_good[iI]) {
           // Generate map and point structures

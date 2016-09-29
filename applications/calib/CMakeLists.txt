@@ -6,7 +6,7 @@ include_directories( ${Pangolin_INCLUDE_DIRS} )
 
 # git clone https://ceres-solver.googlesource.com/ceres-solver
 list(APPEND SEARCH_HEADERS ${EIGEN3_INCLUDE_DIR}) # Help Ceres find Eigen
-find_package( Ceres 1.6.0 QUIET )
+find_package( CeresSolver 1.6.0 QUIET )
 include_directories( ${CERES_INCLUDES} )
 
 # Check that OPENCV is available
@@ -15,13 +15,17 @@ find_package( OpenCV QUIET )
 find_package( CVars QUIET )
 
 option(BUILD_CALIBGRID OFF "Toggle build calibgrid.")
-if( Pangolin_FOUND AND Ceres_FOUND AND OpenCV_FOUND AND CVars_FOUND AND BUILD_CALIBGRID)
+if( Pangolin_FOUND AND CeresSolver_FOUND AND OpenCV_FOUND AND CVars_FOUND AND BUILD_CALIBGRID)
+  message(${CVars_LIBRARIES})
+  message(${CeresSolver_LIBRARIES})
     add_executable( calibgrid main.cpp )
+    include_directories( ${CeresSolver_INCLUDE_DIRS} )
     target_link_libraries( calibgrid
-        ${CERES_LIBRARIES}
+        ${CeresSolver_LIBRARIES}
         ${Pangolin_LIBRARIES}
         ${Calibu_LIBRARIES}
-        ${CVars_LIBRARIES}
+        #${CVars_LIBRARIES}
+        /home/jstraub/workspace/research/3rdparty/CVars/build/libcvars.so
         calibu )
 
     install(TARGETS calibgrid EXPORT CalibuTargets RUNTIME
@@ -29,7 +33,7 @@ if( Pangolin_FOUND AND Ceres_FOUND AND OpenCV_FOUND AND CVars_FOUND AND BUILD_CA
 elseif(BUILD_CALIBGRID)
     #report what's missing
     set(WARNING_MSG "calibgrid dependencies not met:")
-    foreach(dep Pangolin Ceres OpenCV CVars)
+    foreach(dep Pangolin CeresSolver OpenCV CVars)
         if(NOT ${dep}_FOUND)
             set(WARNING_MSG "${WARNING_MSG} ${dep}")
         endif() 

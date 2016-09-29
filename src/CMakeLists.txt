@@ -38,6 +38,7 @@ set(HEADERS
   ${INC_DIR}/utils/PlaneBasis.h
   ${INC_DIR}/utils/StreamOperatorsEigen.h
   ${INC_DIR}/utils/StreamOperatorsSophus.h
+  ${INC_DIR}/cam/camera_models_kb4.hpp
   )
 
 set(SRC_DIR ${Calibu_SOURCE_DIR}/src)
@@ -55,6 +56,7 @@ SET(SOURCES
   ${SRC_DIR}/target/TargetGridDot.cpp
   ${SRC_DIR}/utils/Utils.cpp
   ${SRC_DIR}/utils/Xml.cpp
+  ${SRC_DIR}/cam/camera_models_kb4.cpp
   )
 
 #######################################################

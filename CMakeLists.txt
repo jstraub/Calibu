@@ -97,6 +97,7 @@ SET(SOURCES
   ${SRC_DIR}/target/RandomGrid.cpp
   ${SRC_DIR}/target/TargetGridDot.cpp
   ${SRC_DIR}/utils/Utils.cpp
+  ${SRC_DIR}/cam/camera_models_kb4.cpp
   )
 
 #######################################################
