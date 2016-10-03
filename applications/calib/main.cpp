@@ -15,7 +15,7 @@
 #include <calibu/pose/Pnp.h>
 #include <calibu/conics/ConicFinder.h>
 
-#include <cvars/CVar.h>
+//#include <cvars/CVar.h>
 
 #include "GetPot"
 
@@ -223,9 +223,9 @@ int main( int argc, char** argv)
   image_processing.Params().at_threshold = 0.9;
   image_processing.Params().at_window_ratio = 30.0;
 
-  CVarUtils::AttachCVar("proc.adaptive.threshold", &image_processing.Params().at_threshold);
-  CVarUtils::AttachCVar("proc.adaptive.window_ratio", &image_processing.Params().at_window_ratio);
-  CVarUtils::AttachCVar("proc.black_on_white", &image_processing.Params().black_on_white);
+  //CVarUtils::AttachCVar("proc.adaptive.threshold", &image_processing.Params().at_threshold);
+  //CVarUtils::AttachCVar("proc.adaptive.window_ratio", &image_processing.Params().at_window_ratio);
+  //CVarUtils::AttachCVar("proc.black_on_white", &image_processing.Params().black_on_white);
 
   ////////////////////////////////////////////////////////////////////
   // Setup Grid pattern

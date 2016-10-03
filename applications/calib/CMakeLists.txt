@@ -12,10 +12,10 @@ include_directories( ${CERES_INCLUDES} )
 # Check that OPENCV is available
 set(NO_OPENCV_GPU TRUE)
 find_package( OpenCV QUIET )
-find_package( CVars QUIET )
+#find_package( CVars QUIET )
 
 option(BUILD_CALIBGRID OFF "Toggle build calibgrid.")
-if( Pangolin_FOUND AND CeresSolver_FOUND AND OpenCV_FOUND AND CVars_FOUND AND BUILD_CALIBGRID)
+if( Pangolin_FOUND AND CeresSolver_FOUND AND OpenCV_FOUND AND BUILD_CALIBGRID)
   message(${CVars_LIBRARIES})
   message(${CeresSolver_LIBRARIES})
     add_executable( calibgrid main.cpp )
@@ -24,7 +24,7 @@ if( Pangolin_FOUND AND CeresSolver_FOUND AND OpenCV_FOUND AND CVars_FOUND AND BU
         ${CeresSolver_LIBRARIES}
         ${Pangolin_LIBRARIES}
         ${Calibu_LIBRARIES}
-        ${CVars_LIBRARIES}
+        #${CVars_LIBRARIES}
         calibu )
 
     install(TARGETS calibgrid EXPORT CalibuTargets RUNTIME
