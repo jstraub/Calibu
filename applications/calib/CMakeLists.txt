@@ -24,8 +24,7 @@ if( Pangolin_FOUND AND CeresSolver_FOUND AND OpenCV_FOUND AND CVars_FOUND AND BU
         ${CeresSolver_LIBRARIES}
         ${Pangolin_LIBRARIES}
         ${Calibu_LIBRARIES}
-        #${CVars_LIBRARIES}
-        /home/jstraub/workspace/research/3rdparty/CVars/build/libcvars.so
+        ${CVars_LIBRARIES}
         calibu )
 
     install(TARGETS calibgrid EXPORT CalibuTargets RUNTIME
